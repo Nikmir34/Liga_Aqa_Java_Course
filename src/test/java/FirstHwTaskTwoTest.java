@@ -15,7 +15,7 @@ public class FirstHwTaskTwoTest {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
         driver.manage().window().setSize(new Dimension(1980, 1080));
         driver.get("http://172.24.120.5:8081/login");
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("login-input"))).sendKeys("login_test");
+        driver.findElement(By.id("login-input")).sendKeys("login_test");
         driver.quit();
     }
 
