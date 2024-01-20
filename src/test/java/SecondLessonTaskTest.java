@@ -20,7 +20,7 @@ public class SecondLessonTaskTest {
         String loginLabelText = driver.findElement(By.id("login-input")).getAttribute("value");
         driver.findElement(By.id("password-input")).sendKeys(loginLabelText);
         driver.findElement(By.id("password-input")).clear();
-        String authText = driver.findElement(By.cssSelector(".form_auth_button.btn.btn-primary:first-child")).getAttribute("class");
+        String authText = driver.findElement(By.cssSelector(".form_auth_button.btn.btn-primary:first-child")).getCssValue("cursor");
         driver.findElement(By.id("password-input")).sendKeys(authText);
         driver.quit();
     }
