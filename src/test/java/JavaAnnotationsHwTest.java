@@ -9,7 +9,7 @@ public class JavaAnnotationsHwTest {
 
     @BeforeAll
     public static void startTesting() {
-        System.out.println("Начало тестирования ");
+        System.out.println("Начало тестирования");
     }
     @BeforeEach
     public void initDriver() {
