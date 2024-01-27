@@ -1,9 +1,7 @@
 package code.six_homework_extra;
-import code.six_homework.FirstClass;
 
 public class TwoClass {
-    public static void main(String[] args){
-        FirstClass firstClass = new FirstClass();
-        FirstClass.test();
+    public static void secondTask(){
+        System.out.print("Текст из второго класса");
     }
 }
