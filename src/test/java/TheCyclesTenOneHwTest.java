@@ -45,16 +45,16 @@ public class TheCyclesTenOneHwTest {
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             // Получаем id Заголовка первой заметки
-            String getNotes = driver.findElement(By.xpath("//div[2]/div/div/div/p")).getAttribute("id");
+            String getNotes = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//p")).getAttribute("id");
             getNotes = getNotes.substring(11);
             int title = Integer.parseInt(getNotes.trim());
-            int titles = title + i;
+            int titles = title;
             String oldTitles = driver.findElement(By.id("note-title-" + titles)).getText();
             // Получаем id Текста первой заметки
-            String getText = driver.findElement(By.xpath("//div[2]/div/div/div/div")).getAttribute("id");
+            String getText = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//div")).getAttribute("id");
             getText = getText.substring(13);
             int text = Integer.parseInt(getText.trim());
-            int textex = text + i;
+            int textex = text;
             String oldText = driver.findElement(By.cssSelector("#note-content-" + textex + ":nth-child(2)")).getText();
             System.out.printf("Старая заметка №" + (i + 1) + ": \nЗаголовок: %s\t\nТекст: %s\n\n",oldTitles, oldText);
 
@@ -75,6 +75,7 @@ public class TheCyclesTenOneHwTest {
 
 
             }
+
     }
 
     @AfterEach
