@@ -44,13 +44,13 @@ public class TheCyclesTenOneHwTest {
             driver.navigate().refresh();
 
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-            // Получаем id Заголовка первой заметки
+            // Получаем id Заголовка заметки
             String getNotes = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//p")).getAttribute("id");
             getNotes = getNotes.substring(11);
             int title = Integer.parseInt(getNotes.trim());
             int titles = title;
             String oldTitles = driver.findElement(By.id("note-title-" + titles)).getText();
-            // Получаем id Текста первой заметки
+            // Получаем id Текста заметки
             String getText = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//div")).getAttribute("id");
             getText = getText.substring(13);
             int text = Integer.parseInt(getText.trim());
