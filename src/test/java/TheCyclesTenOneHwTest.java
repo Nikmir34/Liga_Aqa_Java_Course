@@ -37,8 +37,6 @@ public class TheCyclesTenOneHwTest {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.className("Card_containerNew__adAai"))).click();
             //Заполяем Заголовок
             driver.findElement(By.cssSelector(".ModalCard_cardBodyInput__ghZU0.modal-title")).sendKeys("Заметка № " + (i + 1));
-            //Заполняем Текст
-            driver.findElement(By.id("note-modal-content-new_empty")).sendKeys("Текст заметки № " + (i + 1));
             //Кликаем на кнопку Ок
             driver.findElement(By.id("note-modal-save-btn-new_empty")).click();
             driver.navigate().refresh();
@@ -48,29 +46,27 @@ public class TheCyclesTenOneHwTest {
             String getNotes = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//p")).getAttribute("id");
             getNotes = getNotes.substring(11);
             int title = Integer.parseInt(getNotes.trim());
-            int titles = title;
-            String oldTitles = driver.findElement(By.id("note-title-" + titles)).getText();
+            String oldTitles = driver.findElement(By.id("note-title-" + title)).getText();
             // Получаем id Текста заметки
             String getText = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//div")).getAttribute("id");
             getText = getText.substring(13);
             int text = Integer.parseInt(getText.trim());
-            int textex = text;
-            String oldText = driver.findElement(By.cssSelector("#note-content-" + textex + ":nth-child(2)")).getText();
+            String oldText = driver.findElement(By.cssSelector("#note-content-" + text + ":nth-child(2)")).getText();
             System.out.printf("Старая заметка №" + (i + 1) + ": \nЗаголовок: %s\t\nТекст: %s\n\n",oldTitles, oldText);
 
             driver.navigate().refresh();
-            driver.findElement(By.id("note-edit-btn-" + titles)).click();
+            driver.findElement(By.id("note-edit-btn-" + title)).click();
 
-            driver.findElement(By.id("note-modal-title-" + titles)).click();
-            driver.findElement(By.id("note-modal-title-" + titles)).clear();
-            driver.findElement(By.id("note-modal-title-" + titles)).sendKeys("Новая заметка №" + (i + 1));
-            driver.findElement(By.id("note-modal-content-" + titles)).click();
-            driver.findElement(By.id("note-modal-content-" + titles)).clear();
-            driver.findElement(By.id("note-modal-content-" + titles)).sendKeys("Текст новой заметки №" + (i + 1));
+            driver.findElement(By.id("note-modal-title-" + title)).click();
+            driver.findElement(By.id("note-modal-title-" + title)).clear();
+            driver.findElement(By.id("note-modal-title-" + title)).sendKeys("Новая заметка №" + (i + 1));
+            driver.findElement(By.id("note-modal-content-" + title)).click();
+            driver.findElement(By.id("note-modal-content-" + title)).clear();
+            driver.findElement(By.id("note-modal-content-" + title)).sendKeys("Текст новой заметки №" + (i + 1));
 
-            driver.findElement(By.id("note-modal-save-btn-" + titles)).click();
-            String newTitles = driver.findElement(By.id("note-title-" + titles)).getText();
-            String newText = driver.findElement(By.cssSelector("#note-content-" + textex + ":nth-child(2)")).getText();
+            driver.findElement(By.id("note-modal-save-btn-" + title)).click();
+            String newTitles = driver.findElement(By.id("note-title-" + title)).getText();
+            String newText = driver.findElement(By.cssSelector("#note-content-" + text + ":nth-child(2)")).getText();
             System.out.printf("Новая заметка №" + (i + 1) + ": \nЗаголовок: %s\t\nТекст: %s\n\n",newTitles, newText);
 
 
