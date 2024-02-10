@@ -37,17 +37,10 @@ public class TheCyclesTenTwoHwTest {
     @Test
     @DisplayName(value = "Домашнее задание №10-2")
     public void createNotes() {
-        int q = 5;
-        int y = 0;
-        do {
-            int i = 1;
-            int x = 0;
-            do {
-                int j = i++;
+        for (int j = countNote(); j < countNote()+3; j++) {
+            for (int i = 1; i <= countNote(); i++) {
+                if (countNote() == 0) break;
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-                if (countNote() == 0) {
-                    break;
-                }
                 // Получаем id Заголовка заметки
                 List<WebElement> getNotes = driver.findElements(By.xpath("//div[contains(@id,'note-container-')]//p"));
                 String oldTitle = getNotes.get(j - 1).getText();
@@ -57,31 +50,22 @@ public class TheCyclesTenTwoHwTest {
                 editButton.get(j - 1).click();
                 driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).click();
                 driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).clear();
-                driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).sendKeys("Новая заметка №" + (j));
+                driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).sendKeys("Новая заметка №" + i);
                 driver.findElement(By.xpath("//button[contains(@id,'note-modal-save-btn-')]")).click();
-                String newTitle = getNotes.get(j - 1).getText();
+                String newTitle = getNotes.get(i - 1).getText();
                 System.out.printf("Новый заголовок: %s\n\n", newTitle);
 
-            } while (x++ < countNote() - 1);
-
-            int o = y++;
+            }
+            if (countNote() != 0) break;
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-//            if (countNote() != 0) {
-//                break;
-//            }
-            //g = countNote() + 6;
             //Кликаем на нопку Создать заголовок
             wait.until(ExpectedConditions.presenceOfElementLocated(By.className("Card_containerNew__adAai"))).click();
             //Заполяем Заголовок
-            driver.findElement(By.cssSelector(".ModalCard_cardBodyInput__ghZU0.modal-title")).sendKeys("Заметка № " + (y - 1));
+            driver.findElement(By.cssSelector(".ModalCard_cardBodyInput__ghZU0.modal-title")).sendKeys("Заметка № " + (j + 1));
             //Кликаем на кнопку Ок
             driver.findElement(By.id("note-modal-save-btn-new_empty")).click();
             driver.navigate().refresh();
-            String getNote = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//p")).getAttribute("id");
-            getNote = getNote.substring(11);
-            int title = Integer.parseInt(getNote.trim());
-            //String oldTitles = driver.findElement(By.id("note-title-" + title)).getText();
-        } while (countNote() < q);
+        }
     }
 
     @AfterEach
