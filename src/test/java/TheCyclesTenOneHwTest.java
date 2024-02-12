@@ -33,11 +33,13 @@ public class TheCyclesTenOneHwTest {
     public void createNotes(){
         for (int i=0; i<3; i++){
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            //Кликаем на нопку Создать заголовок
+            // Кликаем на нопку Создать заголовок
             wait.until(ExpectedConditions.presenceOfElementLocated(By.className("Card_containerNew__adAai"))).click();
             //Заполяем Заголовок
             driver.findElement(By.cssSelector(".ModalCard_cardBodyInput__ghZU0.modal-title")).sendKeys("Заметка № " + (i + 1));
-            //Кликаем на кнопку Ок
+            //Заполняем Текст
+            driver.findElement(By.id("note-modal-content-new_empty")).sendKeys("Текст заметки № " + (i + 1));
+            // Кликаем на кнопку Ок
             driver.findElement(By.id("note-modal-save-btn-new_empty")).click();
             driver.navigate().refresh();
 
