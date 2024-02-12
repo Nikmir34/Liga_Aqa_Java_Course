@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
 import java.time.Duration;
 import java.util.List;
 
@@ -47,10 +48,10 @@ public class TheCyclesTenTwoHwTest {
                 // Получаем id Заголовка заметки
                 List<WebElement> getNotes = driver.findElements(By.xpath("//div[contains(@id,'note-container-')]//p"));
                 String oldTitle = getNotes.get(i - 1).getText();
-                System.out.printf("Итерация:%d\nСтарый заголовок: %s\n", i - 1, oldTitle);
+                System.out.printf("Итерация:%d\nСтарый заголовок: %s\n", i, oldTitle);
                 // Получаем Values Кнопки редактирования
                 List<WebElement> editButton = driver.findElements(By.xpath("//img[contains(@id,'note-edit-btn')]"));
-                editButton.get(j - 1).click();
+                editButton.get(i - 1).click();
                 driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).click();
                 driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).clear();
                 driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).sendKeys("Новая заметка №" + i);
@@ -68,6 +69,11 @@ public class TheCyclesTenTwoHwTest {
             //Кликаем на кнопку Ок
             driver.findElement(By.id("note-modal-save-btn-new_empty")).click();
             driver.navigate().refresh();
+            //Получаем Id заметки
+            String noteId = driver.findElement(By.xpath("//*[contains(@id,'note-container')][last()]")).getAttribute("id");
+            noteId = noteId.substring(15);
+            String titleText = driver.findElement(By.id("note-title-" + noteId)).getText();
+            System.out.printf("Итерация:%d\nНазвание: %s\n", j + 1, titleText);
         }
     }
 
