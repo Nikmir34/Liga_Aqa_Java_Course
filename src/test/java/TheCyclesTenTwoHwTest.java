@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 import java.util.List;
 
+@DisplayName(value = "Домашнее задание №10-2")
 public class TheCyclesTenTwoHwTest {
     WebDriver driver;
 
@@ -38,7 +39,7 @@ public class TheCyclesTenTwoHwTest {
     }
 
     @Test
-    @DisplayName(value = "Домашнее задание №10-2")
+    @DisplayName(value = "Цикл Создания - Редактирования Заметок")
     public void createNotes() {
         int g = countNote();
         for (int j = g; j < g + 3; j++) {
