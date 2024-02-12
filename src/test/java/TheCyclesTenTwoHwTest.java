@@ -26,7 +26,7 @@ public class TheCyclesTenTwoHwTest {
     public void initDriver() {
         driver = new ChromeDriver();
         // Ожидание
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
         //Открытие стенда
         driver.get("http://172.24.120.5:8081/login");
         //Ввести значение в поле Логин
@@ -70,7 +70,7 @@ public class TheCyclesTenTwoHwTest {
             driver.findElement(By.id("note-modal-save-btn-new_empty")).click();
             driver.navigate().refresh();
             //Получаем Id заметки
-            String noteId = driver.findElement(By.xpath("//*[contains(@id,'note-container')][last()]")).getAttribute("id");
+            String noteId = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]")).getAttribute("id");
             noteId = noteId.substring(15);
             String titleText = driver.findElement(By.id("note-title-" + noteId)).getText();
             System.out.printf("Итерация:%d\nНазвание созданной заметки: %s\n\n", j + 1, titleText);
