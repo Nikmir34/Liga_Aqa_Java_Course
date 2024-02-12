@@ -73,7 +73,7 @@ public class TheCyclesTenTwoHwTest {
             String noteId = driver.findElement(By.xpath("//*[contains(@id,'note-container')][last()]")).getAttribute("id");
             noteId = noteId.substring(15);
             String titleText = driver.findElement(By.id("note-title-" + noteId)).getText();
-            System.out.printf("Итерация:%d\nНазвание: %s\n", j + 1, titleText);
+            System.out.printf("Итерация:%d\nНазвание созданной заметки: %s\n\n", j + 1, titleText);
         }
     }
 
