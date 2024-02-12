@@ -5,14 +5,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
 import java.time.Duration;
 import java.util.List;
 
 public class TheCyclesTenTwoHwTest {
     WebDriver driver;
 
-    private int countNote(){
+    private int countNote() {
         List<WebElement> notes = driver.findElements(By.xpath("//div[contains(@id,'note-container')]"));
         return notes.size();
     }
@@ -21,9 +20,12 @@ public class TheCyclesTenTwoHwTest {
     public static void startTesting() {
         System.out.println("Начало тестирования");
     }
+
     @BeforeEach
     public void initDriver() {
         driver = new ChromeDriver();
+        // Ожидание
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         //Открытие стенда
         driver.get("http://172.24.120.5:8081/login");
         //Ввести значение в поле Логин
@@ -37,13 +39,14 @@ public class TheCyclesTenTwoHwTest {
     @Test
     @DisplayName(value = "Домашнее задание №10-2")
     public void createNotes() {
-        for (int j = countNote(); j < countNote()+3; j++) {
-            for (int i = 1; i <= countNote(); i++) {
-                if (countNote() == 0) break;
+        int g = countNote();
+        for (int j = g; j < g + 3; j++) {
+            for (int i = 1; i <= g; i++) {
+                if (g == 0) break;
                 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
                 // Получаем id Заголовка заметки
                 List<WebElement> getNotes = driver.findElements(By.xpath("//div[contains(@id,'note-container-')]//p"));
-                String oldTitle = getNotes.get(j - 1).getText();
+                String oldTitle = getNotes.get(i - 1).getText();
                 System.out.printf("Итерация:%d\nСтарый заголовок: %s\n", i - 1, oldTitle);
                 // Получаем Values Кнопки редактирования
                 List<WebElement> editButton = driver.findElements(By.xpath("//img[contains(@id,'note-edit-btn')]"));
@@ -56,7 +59,7 @@ public class TheCyclesTenTwoHwTest {
                 System.out.printf("Новый заголовок: %s\n\n", newTitle);
 
             }
-            if (countNote() != 0) break;
+            if (g != 0) break;
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
             //Кликаем на нопку Создать заголовок
             wait.until(ExpectedConditions.presenceOfElementLocated(By.className("Card_containerNew__adAai"))).click();
@@ -78,4 +81,5 @@ public class TheCyclesTenTwoHwTest {
         System.out.println("Окончание тестирования");
     }
 }
+
 
