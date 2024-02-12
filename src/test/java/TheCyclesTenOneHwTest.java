@@ -15,6 +15,7 @@ public class TheCyclesTenOneHwTest {
     public static void startTesting() {
         System.out.println("Начало тестирования");
     }
+
     @BeforeEach
     public void initDriver() {
         driver = new ChromeDriver();
@@ -30,8 +31,8 @@ public class TheCyclesTenOneHwTest {
 
     @Test
     @DisplayName(value = "Новая + Старая заметки")
-    public void createNotes(){
-        for (int i=0; i<3; i++){
+    public void createNotes() {
+        for (int i = 0; i < 3; i++) {
             WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
             // Кликаем на нопку Создать заголовок
             wait.until(ExpectedConditions.presenceOfElementLocated(By.className("Card_containerNew__adAai"))).click();
@@ -41,38 +42,50 @@ public class TheCyclesTenOneHwTest {
             driver.findElement(By.id("note-modal-content-new_empty")).sendKeys("Текст заметки № " + (i + 1));
             // Кликаем на кнопку Ок
             driver.findElement(By.id("note-modal-save-btn-new_empty")).click();
+            // Рефреш страницы
             driver.navigate().refresh();
-
+            // Ожидание
             driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
             // Получаем id Заголовка заметки
             String getNotes = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//p")).getAttribute("id");
+            // Обрезаем символы
             getNotes = getNotes.substring(11);
+            // Переводим в int
             int title = Integer.parseInt(getNotes.trim());
+            // Id заголовка
             String oldTitles = driver.findElement(By.id("note-title-" + title)).getText();
             // Получаем id Текста заметки
             String getText = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]//div")).getAttribute("id");
+            // Обрезаем символы
             getText = getText.substring(13);
+            // Переводим в int
             int text = Integer.parseInt(getText.trim());
             String oldText = driver.findElement(By.cssSelector("#note-content-" + text + ":nth-child(2)")).getText();
-            System.out.printf("Старая заметка №" + (i + 1) + ": \nЗаголовок: %s\t\nТекст: %s\n\n",oldTitles, oldText);
-
+            // Выводим данные старых заметок в консоль
+            System.out.printf("Старая заметка №" + (i + 1) + ": \nЗаголовок: %s\t\nТекст: %s\n\n", oldTitles, oldText);
+            // Рефреш страницы
             driver.navigate().refresh();
+            // Клик кнопки редактрование
             driver.findElement(By.id("note-edit-btn-" + title)).click();
-
+            // Клик поля Заголовок заметки
             driver.findElement(By.id("note-modal-title-" + title)).click();
+            // Чистка поля Заголовок заметки
             driver.findElement(By.id("note-modal-title-" + title)).clear();
+            // Заполняем поле Заголовок заметки
             driver.findElement(By.id("note-modal-title-" + title)).sendKeys("Новая заметка №" + (i + 1));
+            // Клик на поле Тело заметки
             driver.findElement(By.id("note-modal-content-" + title)).click();
+            // Чистка поля Тело заметки
             driver.findElement(By.id("note-modal-content-" + title)).clear();
+            // Заполняем поле Тело заметки
             driver.findElement(By.id("note-modal-content-" + title)).sendKeys("Текст новой заметки №" + (i + 1));
-
+            // Клик на кнопку Сохранить
             driver.findElement(By.id("note-modal-save-btn-" + title)).click();
             String newTitles = driver.findElement(By.id("note-title-" + title)).getText();
             String newText = driver.findElement(By.cssSelector("#note-content-" + text + ":nth-child(2)")).getText();
-            System.out.printf("Новая заметка №" + (i + 1) + ": \nЗаголовок: %s\t\nТекст: %s\n\n",newTitles, newText);
-
-
-            }
+            // Выводим данные новых заметок в консоль
+            System.out.printf("Новая заметка №" + (i + 1) + ": \nЗаголовок: %s\t\nТекст: %s\n\n", newTitles, newText);
+        }
 
     }
 
