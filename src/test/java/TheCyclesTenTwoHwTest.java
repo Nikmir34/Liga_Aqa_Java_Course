@@ -27,7 +27,7 @@ public class TheCyclesTenTwoHwTest {
     public void initDriver() {
         driver = new ChromeDriver();
         // Ожидание
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(6));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         //Открытие стенда
         driver.get("http://172.24.120.5:8081/login");
         //Ввести значение в поле Логин
@@ -62,7 +62,7 @@ public class TheCyclesTenTwoHwTest {
 
             }
             if (g != 0) break;
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
             //Кликаем на нопку Создать заголовок
             wait.until(ExpectedConditions.presenceOfElementLocated(By.className("Card_containerNew__adAai"))).click();
             //Заполяем Заголовок
@@ -74,7 +74,18 @@ public class TheCyclesTenTwoHwTest {
             String noteId = driver.findElement(By.xpath("//div[contains(@id,'note-container')][last()]")).getAttribute("id");
             noteId = noteId.substring(15);
             String titleText = driver.findElement(By.id("note-title-" + noteId)).getText();
-            System.out.printf("Итерация:%d\nНазвание созданной заметки: %s\n\n", j + 1, titleText);
+            System.out.printf("Итерация:%d\nНазвание созданной заметки: %s\n", j + 1, titleText);
+            // Получаем id Заголовка заметки
+            List<WebElement> getNotes = driver.findElements(By.xpath("//div[contains(@id,'note-container-')]//p"));
+            // Получаем Values Кнопки редактирования
+            List<WebElement> editButton = driver.findElements(By.xpath("//img[contains(@id,'note-edit-btn')]"));
+            editButton.get(j).click();
+            driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).click();
+            driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).clear();
+            driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).sendKeys("Новая заметка №" + (j + 1));
+            driver.findElement(By.xpath("//button[contains(@id,'note-modal-save-btn-')]")).click();
+            String newTitle = getNotes.get(j).getText();
+            System.out.printf("Новый заголовок созданной заметки: %s\n\n", newTitle);
         }
     }
 
