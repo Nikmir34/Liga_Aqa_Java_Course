@@ -79,10 +79,15 @@ public class TheCyclesTenTwoHwTest {
             List<WebElement> getNotes = driver.findElements(By.xpath("//div[contains(@id,'note-container-')]//p"));
             // Получаем Values Кнопки редактирования
             List<WebElement> editButton = driver.findElements(By.xpath("//img[contains(@id,'note-edit-btn')]"));
+            // Нажимаем на кнопку Редактировать
             editButton.get(j).click();
+            // Кликаем на Заголовок
             driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).click();
+            // Очищаем заголовок
             driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).clear();
+            // Вводим новоые значение в Заголовок
             driver.findElement(By.xpath("//div[contains(@id,'note-modal-title-')]")).sendKeys("Новая заметка №" + (j + 1));
+            // Сохраняем отредактированную заметку
             driver.findElement(By.xpath("//button[contains(@id,'note-modal-save-btn-')]")).click();
             String newTitle = getNotes.get(j).getText();
             System.out.printf("Новый заголовок созданной заметки: %s\n\n", newTitle);
