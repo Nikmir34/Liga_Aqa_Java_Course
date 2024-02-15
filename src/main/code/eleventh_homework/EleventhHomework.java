@@ -24,17 +24,11 @@ public class EleventhHomework {
 
     public static void thirdTask(){
         String textLang ="Обожаю изучать новые языки";
-        int startFirstTask = 7;
-        int endFirstTask = 26;
-        char [] frs=new char[endFirstTask - startFirstTask];
-        textLang.getChars(startFirstTask, endFirstTask, frs, 0 );
-        int startSecondTask = 7;
-        int endSecondTask = 14;
-        char [] dst=new char[endSecondTask - startSecondTask];
-        textLang.getChars(startSecondTask, endSecondTask, dst, 0 );
-        System.out.println(frs);
-        System.out.println(dst);
-        System.out.print("\n");
+        String index1 = textLang.substring(textLang.indexOf("изучать"));
+        String index2 = textLang.substring(textLang.indexOf("изучать"), textLang.indexOf("новые"));
+        System.out.println(index1);
+        System.out.println(index2);
+        System.out.println("\n");
     }
 
     public static void fourthTask(){
