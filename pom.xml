@@ -43,6 +43,11 @@
             <version>5.9.1</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.10</version>
+        </dependency>
 
     </dependencies>
 
@@ -63,6 +68,7 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+
             </plugin>
 
         </plugins>
