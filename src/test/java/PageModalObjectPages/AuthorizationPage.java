@@ -4,7 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
-public class AuthorizationPage {
+public class AuthorizationPage extends DbPage {
     private String urlPage = "http://172.24.120.5:8081/login";
     private By loginTextField = By.id("login-input");
     private By passwordTextField = By.id("password-input");

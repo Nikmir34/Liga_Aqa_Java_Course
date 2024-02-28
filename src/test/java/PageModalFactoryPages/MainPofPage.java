@@ -7,7 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class MainPofPage extends PofTest {
+public class MainPofPage extends DbPofPage {
     private WebDriver driver;
     @FindBy(id = "logout-btn")
     private WebElement logoutButton;

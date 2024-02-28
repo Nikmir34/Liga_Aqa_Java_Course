@@ -1,12 +1,13 @@
 package PageModalFactoryPages;
 
+import PageModalObjectPages.DbPage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class AuthorizationPofPage {
+public class AuthorizationPofPage extends DbPofPage {
     private WebDriver driver;
     private String urlPage = "http://172.24.120.5:8081/login";
     @FindBy(id = "login-input")
