@@ -1,9 +1,6 @@
 package PageModalObjectTests;
 
-
-
 import org.junit.jupiter.api.*;
-
 import static org.junit.Assert.assertEquals;
 
 @DisplayName(value = "Домашнее задание №16")

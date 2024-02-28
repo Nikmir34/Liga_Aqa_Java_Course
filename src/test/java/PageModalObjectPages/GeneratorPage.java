@@ -9,6 +9,7 @@ public class GeneratorPage {
     // Login Генератор
     public Integer numberGenerator = 1 + (int) (Math.random() * 50000);
     public String user = "autotest" + numberGenerator;
+
     public GeneratorPage(WebDriver driver) {
         this.driver = driver;
     }

@@ -1,8 +1,6 @@
 package PageModalFactoryPages;
 
-import PageModalObjectPages.GeneratorPage;
 import org.openqa.selenium.WebDriver;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;

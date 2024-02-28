@@ -1,17 +1,14 @@
 package PageModalObjectPages;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Order;
 import org.openqa.selenium.WebDriver;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.Statement;
 
-public class DbPage extends GeneratorPage{
+public class DbPage extends GeneratorPage {
 
     private WebDriver driver;
+
     public DbPage(WebDriver driver) {
         this.driver = driver;
     }
