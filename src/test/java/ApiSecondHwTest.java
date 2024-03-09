@@ -3,7 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName(value = "Домашнее задание №2 API")
-public class ApiSecondHw {
+public class ApiSecondHwTest {
 
     @DisplayName(value = "Вызов log")
     @Test

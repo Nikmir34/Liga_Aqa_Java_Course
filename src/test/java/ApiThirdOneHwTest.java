@@ -1,12 +1,12 @@
-public class ApiThirdOneHw {
+public class ApiThirdOneHwTest {
     private String noteTitle;
     private String noteContent;
 
     public static class Builder {
-        private ApiThirdOneHw newNote;
+        private ApiThirdOneHwTest newNote;
 
         public Builder() {
-            newNote = new ApiThirdOneHw();
+            newNote = new ApiThirdOneHwTest();
         }
 
         public Builder titleValue(String noteTitle) {
@@ -19,7 +19,7 @@ public class ApiThirdOneHw {
             return this;
         }
 
-        public ApiThirdOneHw build() {
+        public ApiThirdOneHwTest build() {
             return newNote;
         }
 

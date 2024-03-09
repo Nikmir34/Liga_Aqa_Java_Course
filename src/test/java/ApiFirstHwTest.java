@@ -3,7 +3,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 @DisplayName(value = "Домашнее задание №1 API")
-public class ApiFirstHw {
+public class ApiFirstHwTest {
     @DisplayName(value = "Проверка 403 кода")
     @Test
     public void statuscodeTest(){
