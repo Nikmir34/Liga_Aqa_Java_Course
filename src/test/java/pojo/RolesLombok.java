@@ -10,15 +10,15 @@ import java.io.IOException;
 @DisplayName(value = "Домашнее задание №10 API")
 public class RolesLombok {
 
-    private Integer id;
+    private String id;
     private String name;
 
     @Test
     @DisplayName(value = "Оптимизация кода с Lombok")
     public void equalsPropertyTest() throws IOException {
 
-        Roles roles_first = new Roles();
-        roles_first.setId(1);
+        RolesLombok roles_first = new RolesLombok();
+        roles_first.setId("2");
         roles_first.setName("Test");
 
         Roles roles_second = new Roles();
