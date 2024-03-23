@@ -48,7 +48,7 @@ public class User {
     @DisplayName(value = "Домашнее задание №11 API")
     public void createNewUser() {
         User newUser = new User();
-        newUser.setLogin("Dtoshnik2");
+        newUser.setLogin("Dtoshnik10");
         newUser.setPassword("Qwerty$4");
         newUser.setEmail("hotboyxxx228@ya.ru");
         newUser.setDefaultNotes();
