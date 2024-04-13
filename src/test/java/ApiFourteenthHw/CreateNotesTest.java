@@ -1,6 +1,5 @@
 package ApiFourteenthHw;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import io.restassured.RestAssured;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.builder.ResponseSpecBuilder;
@@ -24,6 +23,8 @@ import static org.hamcrest.Matchers.*;
 public class CreateNotesTest {
     public String token;
     private List<Notes> notes;
+    private RequestSpecification requestSpecification;
+    private ResponseSpecification responseSpecification;
 
     @BeforeEach
     public void loginNotesTest() {
@@ -39,6 +40,25 @@ public class CreateNotesTest {
         token = response.get("access_token");
     }
 
+    @BeforeEach
+    public void requestSpecCreateNote() {
+        requestSpecification = new RequestSpecBuilder()
+                .addHeader("Authorization", "Bearer " + token)
+                .setBaseUri("http://172.24.120.5:8081")
+                .setBasePath("/api/users/nikmir/notes")
+                .setContentType("application/json")
+                .build();
+
+    }
+
+    @BeforeEach
+    public void responseSpecCreateNote() {
+        responseSpecification = new ResponseSpecBuilder()
+                .expectStatusCode(201)
+                .setDefaultParser(Parser.JSON)
+                .build();
+    }
+
     @Test
     @DisplayName(value = "Создание заметки со всеми параметрами")
     public void createFullNotes() {
@@ -51,27 +71,14 @@ public class CreateNotesTest {
         List<Notes> listNotes = new ArrayList<>();
         listNotes.add(notesFull);
 
-
-        RequestSpecification requestSpecification = new RequestSpecBuilder()
-                .addHeader("Authorization", "Bearer " + token)
-                .setBaseUri("http://172.24.120.5:8081")
-                .setBasePath("/api/users/nikmir/notes")
-                .setContentType("application/json")
-                .setBody(listNotes)
-                .build();
-
-        ResponseSpecification responseSpecification = new ResponseSpecBuilder()
-                .expectStatusCode(201)
-                .setDefaultParser(Parser.JSON)
-                .expectBody("[0].name", equalTo("TestFull"))
-                .expectBody("[0].content", equalTo("ContentFull"))
-                .expectBody("[0].color", equalTo("#fcba03"))
-                .expectBody("[0].priority", equalTo(0))
-                .build();
-
         RestAssured.given(requestSpecification)
+                .body(listNotes)
                 .post()
-                .then().log().all().spec(responseSpecification);
+                .then().log().all().spec(responseSpecification)
+                .body("[0].name", equalTo("TestFull"),
+                        "[0].content", equalTo("ContentFull"),
+                        "[0].color", equalTo("#fcba03"),
+                        "[0].priority", equalTo(0));
 
 
     }
@@ -85,24 +92,11 @@ public class CreateNotesTest {
         List<Notes> listNotes1 = new ArrayList<>();
         listNotes1.add(notesFull);
 
-
-        RequestSpecification requestSpecification = new RequestSpecBuilder()
-                .addHeader("Authorization", "Bearer " + token)
-                .setBaseUri("http://172.24.120.5:8081")
-                .setBasePath("/api/users/nikmir/notes")
-                .setContentType("application/json")
-                .setBody(listNotes1)
-                .build();
-
-        ResponseSpecification responseSpecification = new ResponseSpecBuilder()
-                .expectStatusCode(201)
-                .setDefaultParser(Parser.JSON)
-                .expectBody("[0].name", equalTo("TestFullName"))
-                .build();
-
         RestAssured.given(requestSpecification)
+                .body(listNotes1)
                 .post()
-                .then().log().all().spec(responseSpecification);
+                .then().log().all().spec(responseSpecification)
+                .body("[0].name", equalTo("TestFullName"));
 
 
     }
@@ -111,31 +105,18 @@ public class CreateNotesTest {
     @DisplayName(value = "Создание заметки только с параметрами name и content")
     public void createNameContentNotes() {
         Notes notesFull = new Notes();
-        notesFull.setName("TestNameContentName");
-        notesFull.setContent("ContentNameContent");
+        notesFull.setName("TestNameContentName1");
+        notesFull.setContent("ContentNameContent1");
 
         List<Notes> listNotes2 = new ArrayList<>();
         listNotes2.add(notesFull);
 
-
-        RequestSpecification requestSpecification = new RequestSpecBuilder()
-                .addHeader("Authorization", "Bearer " + token)
-                .setBaseUri("http://172.24.120.5:8081")
-                .setBasePath("/api/users/nikmir/notes")
-                .setContentType("application/json")
-                .setBody(listNotes2)
-                .build();
-
-        ResponseSpecification responseSpecification = new ResponseSpecBuilder()
-                .expectStatusCode(201)
-                .setDefaultParser(Parser.JSON)
-                .expectBody("[0].name", equalTo("TestNameContentName"))
-                .expectBody("[0].content", equalTo("ContentNameContent"))
-                .build();
-
         RestAssured.given(requestSpecification)
+                .body(listNotes2)
                 .post()
-                .then().log().all().spec(responseSpecification);
+                .then().log().all().spec(responseSpecification)
+                .body("[0].name", equalTo("TestNameContentName"),
+                        "[0].content", equalTo("ContentNameContent"));
 
 
     }
