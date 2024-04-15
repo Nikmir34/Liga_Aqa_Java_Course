@@ -18,16 +18,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static ApiFifteenthHw.Properties.BASE_URI;
-import static ApiFifteenthHw.Properties.CREATE_NOTE_ENDPOINT;
-import static io.restassured.RestAssured.requestSpecification;
-import static io.restassured.RestAssured.responseSpecification;
+import static ApiFifteenthHw.Properties.*;
 import static org.hamcrest.Matchers.equalTo;
 
 @DisplayName(value = "Домашнее задание №15 API")
 public class ApiTest {
     public String token;
     private NoteDTO noteDTO;
+
     private RequestSpecification requestSpecification;
     private ResponseSpecification responseSpecification;
 
@@ -46,7 +44,9 @@ public class ApiTest {
     }
 
     @Test
+    @DisplayName(value ="Создание заметки")
     public void createNoteTest() {
+
         noteDTO = NoteDTO.builder()
                 .name("1")
                 .content("1")
@@ -61,22 +61,10 @@ public class ApiTest {
     }
 
     @Test
+    @DisplayName(value ="Обновление заметки")
     public void editNoteTest() {
-        noteDTO = NoteDTO.builder().name("1")
-                .content("1")
-                .color("#fcba03")
-                .priority(0)
-                .build();
-
-        requestSpecCreateNote(noteDTO);
-        responseSpecCreateNote(200);
-        putNotes();
-
-    }
-
-    @Test
-    public void archiveNoteTest() {
-        noteDTO = NoteDTO.builder().id(379)
+        noteDTO = NoteDTO.builder()
+                .id(449)
                 .name("1")
                 .content("1")
                 .color("#fcba03")
@@ -86,15 +74,38 @@ public class ApiTest {
         requestSpecCreateNote(noteDTO);
         responseSpecCreateNote(204);
         putNotes();
+
     }
 
+    @Test
+    @DisplayName(value ="Архивирование заметки")
+    public void archiveNoteTest() {
+        requestSpecDeleteNote();
+        responseSpecCreateNote(204);
+        deleteNotes();
+    }
+
+
     private void requestSpecCreateNote(NoteDTO noteDTO) {
+        List<NoteDTO> noteList = new ArrayList<>();
+        noteList.add(noteDTO);
+
         requestSpecification = new RequestSpecBuilder()
                 .setBaseUri(BASE_URI)
                 .setBasePath(CREATE_NOTE_ENDPOINT)
                 .addHeader("Authorization", "Bearer " + token)
                 .setContentType(ContentType.JSON)
-                .setBody(noteDTO)
+                .setBody(noteList)
+                .build();
+    }
+
+    private void requestSpecDeleteNote() {
+
+        requestSpecification = new RequestSpecBuilder()
+                .addHeader("Authorization", "Bearer " + token)
+                .setBaseUri(BASE_URI)
+                .setBasePath(ARCHIVE_NOTE)
+                .setContentType(ContentType.JSON)
                 .build();
     }
 

@@ -7,6 +7,7 @@ import io.restassured.builder.ResponseSpecBuilder;
 import io.restassured.http.ContentType;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Singular;
 import pojo.Notes;
 
 import java.util.List;
@@ -19,13 +20,12 @@ import static io.restassured.RestAssured.responseSpecification;
 @Data
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class NoteDTO {
+public class  NoteDTO {
     private Integer id;
     private String name;
     private String content;
     private String color;
     private Integer priority;
-    private List<NotesPojo> notes;
 }
 
 
